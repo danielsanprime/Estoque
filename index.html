@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESTOQUE DANIEL SAN</title>
+<style>
+body{background:#0f1115;color:#fff;font-family:Arial;margin:0}
+header{background:#e60023;padding:16px;text-align:center;font-weight:bold}
+.container{padding:16px;max-width:900px;margin:auto}
+.item{background:#151a22;border-radius:12px;padding:14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.name{font-weight:bold}
+.qty{background:#2a2f3a;border-radius:8px;padding:6px 10px;min-width:60px;text-align:center;margin:0 10px}
+.controls button{background:#333;border:none;color:#fff;border-radius:10px;width:40px;height:40px;font-size:20px}
+</style>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAsrL3eJLWArVegBk4NqrL8m5DsdoA6f1Q",
+  authDomain: "estoque-daniel-san.firebaseapp.com",
+  projectId: "estoque-daniel-san",
+  storageBucket: "estoque-daniel-san.firebasestorage.app",
+  messagingSenderId: "355146085358",
+  appId: "1:355146085358:web:d20d238a253df446aa14ff"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const itens = ["ALGA","ARROZ JAPONÊS","GENGIBRE","GERGELIM","HONDASHI","SHOYU"];
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const container=document.getElementById("lista");
+
+  itens.forEach(nome=>{
+    const div=document.createElement("div");
+    div.className="item";
+    div.innerHTML=`
+      <div class="name">${nome}</div>
+      <div class="controls">
+        <button data-act="-">-</button>
+        <span class="qty" id="q_${nome}">0</span>
+        <button data-act="+">+</button>
+      </div>`;
+    container.appendChild(div);
+
+    const ref=doc(db,"estoque",nome);
+
+    onSnapshot(ref,(snap)=>{
+      const val=snap.exists()?snap.data().qtd:0;
+      document.getElementById("q_"+nome).textContent=val;
+    });
+
+    div.querySelectorAll("button").forEach(btn=>{
+      btn.onclick=async()=>{
+        const span=document.getElementById("q_"+nome);
+        let v=parseInt(span.textContent)||0;
+        if(btn.dataset.act==="+") v++; else v--;
+        await setDoc(ref,{qtd:v});
+      };
+    });
+  });
+});
+</script>
+</head>
+<body>
+<header>ESTOQUE DANIEL SAN</header>
+<div class="container" id="lista"></div>
+</body>
+</html>
