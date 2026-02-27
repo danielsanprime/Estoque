@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang='pt-br'><head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>ESTOQUE DANIEL SAN</title>
+<style>
+body{background:#0f1115;color:#fff;font-family:Arial;margin:0}
+header{background:#e60023;padding:18px;text-align:center;font-weight:bold;font-size:20px}
+.topbar{padding:12px;display:flex;gap:10px}
+input{flex:1;padding:10px;border-radius:8px;border:none;font-size:16px}
+button{background:#e60023;border:none;color:#fff;padding:10px 14px;border-radius:8px;cursor:pointer}
+.container{padding:16px;max-width:900px;margin:auto}
+.item{background:#151a22;border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.qty{background:#2a2f3a;border-radius:8px;padding:6px 12px;min-width:60px;text-align:center;margin:0 10px}
+.controls button{background:#333;width:38px;height:38px;font-size:18px}
+</style>
+<script type='module'>
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getFirestore, doc, setDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyAsrL3eJLWArVegBk4NqrL8m5DsdoA6f1Q",authDomain:"estoque-daniel-san.firebaseapp.com",projectId:"estoque-daniel-san",storageBucket:"estoque-daniel-san.firebasestorage.app",messagingSenderId:"355146085358",appId:"1:355146085358:web:d20d238a253df446aa14ff"};
+const app=initializeApp(firebaseConfig);const db=getFirestore(app);
+const produtos=['alga', 'amendoas', 'arroz_japones', 'bancha', 'castanha_de_caju', 'galao_de_shoyu_20_l', 'gas_macarico', 'gengibre', 'gergelim', 'hondashi', 'macarrao_yakissoba', 'missoshiro_barco', 'molho_agridoce', 'oleo_gergelim', 'panko', 'pimenta_sriracha', 'saque_dourado', 'saque_soft', 'saque_mirim_culinario', 'vinagre_de_arroz', 'wasabi', 'acucar_normal', 'acucar_refinado', 'adocante', 'amido_de_milho', 'arroz_normal', 'azeite', 'azeite_trufado', 'cafe', 'cafe_de_maquina', 'calda_de_sorvete', 'capsula_de_gas', 'chocolate_em_po', 'creme_de_leite', 'coco_ralado', 'doce_de_leite', 'doce_de_leite_choco', 'doritos', 'farinha_de_trigo', 'farofa', 'feijao', 'feijao_preto', 'goiabada', 'leite', 'leite_condensado', 'macarrao', 'maionese', 'margarina_15_kg', 'molho_de_tomate', 'mostarda', 'oleo', 'palito_de_churrasco', 'pimenta_biquinho', 'pimenta_do_reino', 'sal_normal', 'sal_himalaia', 'tomate_seco', 'vinagre', 'meledamame', 'guioza_bovina', 'guioza_suina', 'massa_harumaki', 'ovas_de_capelin', 'shimeji', 'shitake', 'tofu', 'atum', 'camarao_com_casca', 'camarao_sem_casca', 'kanekama', 'lula_tentaculos', 'lula_em_aneis', 'peixe_prego', 'polvo', 'salmao_caixas', 'tilapia', 'brocolis', 'requeijao', 'cream_cheese', 'file_mignon', 'frango_sassami', 'massa_de_pastel', 'mussarela', 'petit_gateau', 'picanha', 'batata_palito', 'carne_de_mistura', 'hamburguer', 'polpa_abacaxi', 'polpa_frutas_vermelhas', 'polpa_maracuja', 'sorvete', 'polpa_de_morango', 'agua_sanitaria', 'bucha_cozinha', 'desinfetante', 'detergente', 'glade', 'limpa_vidro', 'lustra_moveis', 'sabao_em_po', 'alcool_70_gel', 'alcool_70_liquido', 'alcool_92', 'bobina_impressora', 'bobina_maquininha', 'bobina_picotada_20x30', 'bobina_picotada_35x45', 'bucha_limpa_grill', 'canudo_fino_6_mm', 'canudo_grosso_8_mm', 'copo_300_ml', 'copo_cafe', 'enxaguante_bucal', 'etiqueta_de_data', 'garrafinha_suco', 'guardanapo_embalado', 'guardanapo_perola', 'hf_100_4_div_base', 'hf_100_tampa', 'hf_70_base_teppan', 'hf_70_tampa', 'luva_nitrica_preta', 'luva_limpeza_amarela', 'palito_dente_embalad', 'palito_dente_granel', 'pano_de_chao', 'pano_perfex', 'papel_higienico', 'papel_toalha_banhei', 'plastico_filme', 'pote_sunomono', 'pote_poke_g681', 'pote_poke_g684', 'pote_tare_g_695_bran', 'removedor_magico', 'sabonete_liquido', 'sache_de_acucar', 'sache_de_sal', 'saco_de_lixo_200_l', 'saco_de_lixo_40_l', 'saco_talher', 'touca', 'emb_caixa_g_delivery', 'emb_caixa_p_delivery', 'emb_sacola_delivery', 'temakeira', 'caixa_yakissoba', 'etiqueta', 'adesivo_lacre_delivery', 'mascara', 'palito_robata', 'hashi', 'shoyu_primium', 'shoyu_light'];const ref=doc(db,"estoque","produtos");
+window.addEventListener("DOMContentLoaded",()=>{const lista=document.getElementById("lista");const busca=document.getElementById("busca");
+onSnapshot(ref,(snap)=>{const dados=snap.exists()?snap.data():{};lista.innerHTML="";
+produtos.forEach(p=>{if(busca.value && !p.includes(busca.value.toLowerCase())) return;const qtd=dados[p]||0;
+const div=document.createElement("div");div.className="item";
+div.innerHTML=`<div>${p}</div><div class='controls'><button>-</button><span class='qty'>${qtd}</span><button>+</button></div>`;
+const [menos,mais]=div.querySelectorAll("button");
+menos.onclick=()=>updateDoc(ref,{[p]:Math.max(0,qtd-1)});mais.onclick=()=>updateDoc(ref,{[p]:qtd+1});
+lista.appendChild(div);});});busca.oninput=()=>onSnapshot(ref,()=>{});});
+async function zerar(){let obj={};produtos.forEach(p=>obj[p]=0);await setDoc(ref,obj);}window.zerar=zerar;
+</script></head><body>
+<header>ESTOQUE DANIEL SAN</header>
+<div class='topbar'><input id='busca' placeholder='Buscar produto...'><button onclick='zerar()'>Zerar</button></div>
+<div class='container' id='lista'></div>
+</body></html>
