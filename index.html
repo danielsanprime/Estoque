@@ -1,0 +1,2256 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONTROLE DE ESTOQUE</title>
+<style>
+body{background:#0f1115;color:#fff;font-family:Arial;margin:0}
+header{background:#e60023;padding:15px;text-align:center;font-size:20px;font-weight:bold}
+.container{padding:15px;max-width:900px;margin:auto}
+.item{display:flex;justify-content:space-between;align-items:center;background:#1b1f27;margin:6px 0;padding:12px;border-radius:12px}
+.controls button{background:#333;border:none;color:#fff;font-size:20px;width:40px;height:40px;border-radius:10px}
+.controls span{margin:0 10px;font-size:18px;min-width:20px;display:inline-block;text-align:center}
+.send{position:fixed;bottom:0;background:#25D366;color:#fff;width:100%;padding:18px;border:none;font-size:18px;font-weight:bold}
+.fab{
+ position:fixed;
+ bottom:90px;
+ right:20px;
+ width:60px;
+ height:60px;
+ border-radius:50%;
+ background:#ff5722;
+ color:#fff;
+ font-size:26px;
+ border:none;
+ box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+.fab-menu{
+ position:fixed;
+ bottom:160px;
+ right:20px;
+ background:#1b1f27;
+ padding:15px;
+ border-radius:12px;
+ display:none;
+}
+.fab-menu button{
+ display:block;
+ width:200px;
+ margin-bottom:10px;
+ padding:10px;
+ border:none;
+ border-radius:8px;
+ font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<header>CONTROLE DE ESTOQUE</header>
+
+<div class="container">
+
+    <div class="item">
+        <div>
+            <b>ALGA</b><br>
+            Estoque: <input type="number" id="stock_ALGA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ALGA')">-</button>
+            <span id="q_ALGA">0</span>
+            <button onclick="mais('ALGA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>AMÊNDOAS</b><br>
+            Estoque: <input type="number" id="stock_AMÊNDOAS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('AMÊNDOAS')">-</button>
+            <span id="q_AMÊNDOAS">0</span>
+            <button onclick="mais('AMÊNDOAS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ARROZ JAPONÊS</b><br>
+            Estoque: <input type="number" id="stock_ARROZ JAPONÊS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ARROZ JAPONÊS')">-</button>
+            <span id="q_ARROZ JAPONÊS">0</span>
+            <button onclick="mais('ARROZ JAPONÊS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BANCHA</b><br>
+            Estoque: <input type="number" id="stock_BANCHA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BANCHA')">-</button>
+            <span id="q_BANCHA">0</span>
+            <button onclick="mais('BANCHA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CASTANHA DE CAJU</b><br>
+            Estoque: <input type="number" id="stock_CASTANHA DE CAJU" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CASTANHA DE CAJU')">-</button>
+            <span id="q_CASTANHA DE CAJU">0</span>
+            <button onclick="mais('CASTANHA DE CAJU')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GALÃO DE SHOYU 20 L</b><br>
+            Estoque: <input type="number" id="stock_GALÃO DE SHOYU 20 L" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GALÃO DE SHOYU 20 L')">-</button>
+            <span id="q_GALÃO DE SHOYU 20 L">0</span>
+            <button onclick="mais('GALÃO DE SHOYU 20 L')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GÁS MAÇARICO</b><br>
+            Estoque: <input type="number" id="stock_GÁS MAÇARICO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GÁS MAÇARICO')">-</button>
+            <span id="q_GÁS MAÇARICO">0</span>
+            <button onclick="mais('GÁS MAÇARICO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GENGIBRE</b><br>
+            Estoque: <input type="number" id="stock_GENGIBRE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GENGIBRE')">-</button>
+            <span id="q_GENGIBRE">0</span>
+            <button onclick="mais('GENGIBRE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GERGELIM</b><br>
+            Estoque: <input type="number" id="stock_GERGELIM" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GERGELIM')">-</button>
+            <span id="q_GERGELIM">0</span>
+            <button onclick="mais('GERGELIM')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HONDASHI</b><br>
+            Estoque: <input type="number" id="stock_HONDASHI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HONDASHI')">-</button>
+            <span id="q_HONDASHI">0</span>
+            <button onclick="mais('HONDASHI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MACARRÃO YAKISSOBA</b><br>
+            Estoque: <input type="number" id="stock_MACARRÃO YAKISSOBA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MACARRÃO YAKISSOBA')">-</button>
+            <span id="q_MACARRÃO YAKISSOBA">0</span>
+            <button onclick="mais('MACARRÃO YAKISSOBA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MISSOSHIRO BARCO</b><br>
+            Estoque: <input type="number" id="stock_MISSOSHIRO BARCO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MISSOSHIRO BARCO')">-</button>
+            <span id="q_MISSOSHIRO BARCO">0</span>
+            <button onclick="mais('MISSOSHIRO BARCO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MOLHO AGRIDOCE</b><br>
+            Estoque: <input type="number" id="stock_MOLHO AGRIDOCE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MOLHO AGRIDOCE')">-</button>
+            <span id="q_MOLHO AGRIDOCE">0</span>
+            <button onclick="mais('MOLHO AGRIDOCE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>OLEO GERGELIM</b><br>
+            Estoque: <input type="number" id="stock_OLEO GERGELIM" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('OLEO GERGELIM')">-</button>
+            <span id="q_OLEO GERGELIM">0</span>
+            <button onclick="mais('OLEO GERGELIM')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PANKO</b><br>
+            Estoque: <input type="number" id="stock_PANKO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PANKO')">-</button>
+            <span id="q_PANKO">0</span>
+            <button onclick="mais('PANKO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PIMENTA SRIRACHA</b><br>
+            Estoque: <input type="number" id="stock_PIMENTA SRIRACHA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PIMENTA SRIRACHA')">-</button>
+            <span id="q_PIMENTA SRIRACHA">0</span>
+            <button onclick="mais('PIMENTA SRIRACHA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SAQUE DOURADO</b><br>
+            Estoque: <input type="number" id="stock_SAQUE DOURADO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SAQUE DOURADO')">-</button>
+            <span id="q_SAQUE DOURADO">0</span>
+            <button onclick="mais('SAQUE DOURADO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SAQUE SOFT</b><br>
+            Estoque: <input type="number" id="stock_SAQUE SOFT" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SAQUE SOFT')">-</button>
+            <span id="q_SAQUE SOFT">0</span>
+            <button onclick="mais('SAQUE SOFT')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SAQUE MIRIM CULINARIO</b><br>
+            Estoque: <input type="number" id="stock_SAQUE MIRIM CULINARIO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SAQUE MIRIM CULINARIO')">-</button>
+            <span id="q_SAQUE MIRIM CULINARIO">0</span>
+            <button onclick="mais('SAQUE MIRIM CULINARIO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>VINAGRE de arroz</b><br>
+            Estoque: <input type="number" id="stock_VINAGRE de arroz" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('VINAGRE de arroz')">-</button>
+            <span id="q_VINAGRE de arroz">0</span>
+            <button onclick="mais('VINAGRE de arroz')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>WASABI</b><br>
+            Estoque: <input type="number" id="stock_WASABI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('WASABI')">-</button>
+            <span id="q_WASABI">0</span>
+            <button onclick="mais('WASABI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>AÇÚCAR NORMAL</b><br>
+            Estoque: <input type="number" id="stock_AÇÚCAR NORMAL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('AÇÚCAR NORMAL')">-</button>
+            <span id="q_AÇÚCAR NORMAL">0</span>
+            <button onclick="mais('AÇÚCAR NORMAL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>AÇÚCAR REFINADO</b><br>
+            Estoque: <input type="number" id="stock_AÇÚCAR REFINADO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('AÇÚCAR REFINADO')">-</button>
+            <span id="q_AÇÚCAR REFINADO">0</span>
+            <button onclick="mais('AÇÚCAR REFINADO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ADOÇANTE</b><br>
+            Estoque: <input type="number" id="stock_ADOÇANTE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ADOÇANTE')">-</button>
+            <span id="q_ADOÇANTE">0</span>
+            <button onclick="mais('ADOÇANTE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>AMIDO DE MILHO</b><br>
+            Estoque: <input type="number" id="stock_AMIDO DE MILHO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('AMIDO DE MILHO')">-</button>
+            <span id="q_AMIDO DE MILHO">0</span>
+            <button onclick="mais('AMIDO DE MILHO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ARROZ NORMAL</b><br>
+            Estoque: <input type="number" id="stock_ARROZ NORMAL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ARROZ NORMAL')">-</button>
+            <span id="q_ARROZ NORMAL">0</span>
+            <button onclick="mais('ARROZ NORMAL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>AZEITE</b><br>
+            Estoque: <input type="number" id="stock_AZEITE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('AZEITE')">-</button>
+            <span id="q_AZEITE">0</span>
+            <button onclick="mais('AZEITE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>AZEITE TRUFADO</b><br>
+            Estoque: <input type="number" id="stock_AZEITE TRUFADO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('AZEITE TRUFADO')">-</button>
+            <span id="q_AZEITE TRUFADO">0</span>
+            <button onclick="mais('AZEITE TRUFADO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CAFÉ</b><br>
+            Estoque: <input type="number" id="stock_CAFÉ" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CAFÉ')">-</button>
+            <span id="q_CAFÉ">0</span>
+            <button onclick="mais('CAFÉ')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CAFÉ DE MÁQUINA</b><br>
+            Estoque: <input type="number" id="stock_CAFÉ DE MÁQUINA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CAFÉ DE MÁQUINA')">-</button>
+            <span id="q_CAFÉ DE MÁQUINA">0</span>
+            <button onclick="mais('CAFÉ DE MÁQUINA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CALDA DE SORVETE</b><br>
+            Estoque: <input type="number" id="stock_CALDA DE SORVETE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CALDA DE SORVETE')">-</button>
+            <span id="q_CALDA DE SORVETE">0</span>
+            <button onclick="mais('CALDA DE SORVETE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CÁPSULA DE GÁS</b><br>
+            Estoque: <input type="number" id="stock_CÁPSULA DE GÁS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CÁPSULA DE GÁS')">-</button>
+            <span id="q_CÁPSULA DE GÁS">0</span>
+            <button onclick="mais('CÁPSULA DE GÁS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CHOCOLATE EM PÓ</b><br>
+            Estoque: <input type="number" id="stock_CHOCOLATE EM PÓ" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CHOCOLATE EM PÓ')">-</button>
+            <span id="q_CHOCOLATE EM PÓ">0</span>
+            <button onclick="mais('CHOCOLATE EM PÓ')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CREME DE LEITE</b><br>
+            Estoque: <input type="number" id="stock_CREME DE LEITE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CREME DE LEITE')">-</button>
+            <span id="q_CREME DE LEITE">0</span>
+            <button onclick="mais('CREME DE LEITE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>COCO RALADO</b><br>
+            Estoque: <input type="number" id="stock_COCO RALADO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('COCO RALADO')">-</button>
+            <span id="q_COCO RALADO">0</span>
+            <button onclick="mais('COCO RALADO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>DOCE DE LEITE</b><br>
+            Estoque: <input type="number" id="stock_DOCE DE LEITE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('DOCE DE LEITE')">-</button>
+            <span id="q_DOCE DE LEITE">0</span>
+            <button onclick="mais('DOCE DE LEITE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>DOCE DE LEITE CHOCO.</b><br>
+            Estoque: <input type="number" id="stock_DOCE DE LEITE CHOCO." disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('DOCE DE LEITE CHOCO.')">-</button>
+            <span id="q_DOCE DE LEITE CHOCO.">0</span>
+            <button onclick="mais('DOCE DE LEITE CHOCO.')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>DORITOS</b><br>
+            Estoque: <input type="number" id="stock_DORITOS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('DORITOS')">-</button>
+            <span id="q_DORITOS">0</span>
+            <button onclick="mais('DORITOS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>FARINHA DE TRIGO</b><br>
+            Estoque: <input type="number" id="stock_FARINHA DE TRIGO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('FARINHA DE TRIGO')">-</button>
+            <span id="q_FARINHA DE TRIGO">0</span>
+            <button onclick="mais('FARINHA DE TRIGO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>farofa</b><br>
+            Estoque: <input type="number" id="stock_farofa" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('farofa')">-</button>
+            <span id="q_farofa">0</span>
+            <button onclick="mais('farofa')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>FEIJÃO</b><br>
+            Estoque: <input type="number" id="stock_FEIJÃO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('FEIJÃO')">-</button>
+            <span id="q_FEIJÃO">0</span>
+            <button onclick="mais('FEIJÃO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>FEIJÃO PRETO</b><br>
+            Estoque: <input type="number" id="stock_FEIJÃO PRETO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('FEIJÃO PRETO')">-</button>
+            <span id="q_FEIJÃO PRETO">0</span>
+            <button onclick="mais('FEIJÃO PRETO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GOIABADA</b><br>
+            Estoque: <input type="number" id="stock_GOIABADA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GOIABADA')">-</button>
+            <span id="q_GOIABADA">0</span>
+            <button onclick="mais('GOIABADA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LEITE</b><br>
+            Estoque: <input type="number" id="stock_LEITE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LEITE')">-</button>
+            <span id="q_LEITE">0</span>
+            <button onclick="mais('LEITE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LEITE CONDENSADO</b><br>
+            Estoque: <input type="number" id="stock_LEITE CONDENSADO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LEITE CONDENSADO')">-</button>
+            <span id="q_LEITE CONDENSADO">0</span>
+            <button onclick="mais('LEITE CONDENSADO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MACARRÃO</b><br>
+            Estoque: <input type="number" id="stock_MACARRÃO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MACARRÃO')">-</button>
+            <span id="q_MACARRÃO">0</span>
+            <button onclick="mais('MACARRÃO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MAIONESE</b><br>
+            Estoque: <input type="number" id="stock_MAIONESE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MAIONESE')">-</button>
+            <span id="q_MAIONESE">0</span>
+            <button onclick="mais('MAIONESE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MARGARINA 15 KG</b><br>
+            Estoque: <input type="number" id="stock_MARGARINA 15 KG" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MARGARINA 15 KG')">-</button>
+            <span id="q_MARGARINA 15 KG">0</span>
+            <button onclick="mais('MARGARINA 15 KG')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MOLHO DE TOMATE</b><br>
+            Estoque: <input type="number" id="stock_MOLHO DE TOMATE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MOLHO DE TOMATE')">-</button>
+            <span id="q_MOLHO DE TOMATE">0</span>
+            <button onclick="mais('MOLHO DE TOMATE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MOSTARDA</b><br>
+            Estoque: <input type="number" id="stock_MOSTARDA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MOSTARDA')">-</button>
+            <span id="q_MOSTARDA">0</span>
+            <button onclick="mais('MOSTARDA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ÓLEO</b><br>
+            Estoque: <input type="number" id="stock_ÓLEO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ÓLEO')">-</button>
+            <span id="q_ÓLEO">0</span>
+            <button onclick="mais('ÓLEO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PALITO DE CHURRASCO</b><br>
+            Estoque: <input type="number" id="stock_PALITO DE CHURRASCO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PALITO DE CHURRASCO')">-</button>
+            <span id="q_PALITO DE CHURRASCO">0</span>
+            <button onclick="mais('PALITO DE CHURRASCO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PIMENTA BIQUINHO</b><br>
+            Estoque: <input type="number" id="stock_PIMENTA BIQUINHO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PIMENTA BIQUINHO')">-</button>
+            <span id="q_PIMENTA BIQUINHO">0</span>
+            <button onclick="mais('PIMENTA BIQUINHO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PIMENTA DO REINO</b><br>
+            Estoque: <input type="number" id="stock_PIMENTA DO REINO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PIMENTA DO REINO')">-</button>
+            <span id="q_PIMENTA DO REINO">0</span>
+            <button onclick="mais('PIMENTA DO REINO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SAL NORMAL</b><br>
+            Estoque: <input type="number" id="stock_SAL NORMAL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SAL NORMAL')">-</button>
+            <span id="q_SAL NORMAL">0</span>
+            <button onclick="mais('SAL NORMAL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SAL HIMALAIA</b><br>
+            Estoque: <input type="number" id="stock_SAL HIMALAIA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SAL HIMALAIA')">-</button>
+            <span id="q_SAL HIMALAIA">0</span>
+            <button onclick="mais('SAL HIMALAIA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>TOMATE SECO</b><br>
+            Estoque: <input type="number" id="stock_TOMATE SECO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('TOMATE SECO')">-</button>
+            <span id="q_TOMATE SECO">0</span>
+            <button onclick="mais('TOMATE SECO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>VINAGRE</b><br>
+            Estoque: <input type="number" id="stock_VINAGRE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('VINAGRE')">-</button>
+            <span id="q_VINAGRE">0</span>
+            <button onclick="mais('VINAGRE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MEL</b><br>
+            Estoque: <input type="number" id="stock_MEL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MEL')">-</button>
+            <span id="q_MEL">0</span>
+            <button onclick="mais('MEL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>EDAMAME</b><br>
+            Estoque: <input type="number" id="stock_EDAMAME" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('EDAMAME')">-</button>
+            <span id="q_EDAMAME">0</span>
+            <button onclick="mais('EDAMAME')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GUIOZA BOVINA</b><br>
+            Estoque: <input type="number" id="stock_GUIOZA BOVINA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GUIOZA BOVINA')">-</button>
+            <span id="q_GUIOZA BOVINA">0</span>
+            <button onclick="mais('GUIOZA BOVINA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GUIOZA SUÍNA</b><br>
+            Estoque: <input type="number" id="stock_GUIOZA SUÍNA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GUIOZA SUÍNA')">-</button>
+            <span id="q_GUIOZA SUÍNA">0</span>
+            <button onclick="mais('GUIOZA SUÍNA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MASSA HARUMAKI</b><br>
+            Estoque: <input type="number" id="stock_MASSA HARUMAKI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MASSA HARUMAKI')">-</button>
+            <span id="q_MASSA HARUMAKI">0</span>
+            <button onclick="mais('MASSA HARUMAKI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>OVAS DE CAPELIN</b><br>
+            Estoque: <input type="number" id="stock_OVAS DE CAPELIN" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('OVAS DE CAPELIN')">-</button>
+            <span id="q_OVAS DE CAPELIN">0</span>
+            <button onclick="mais('OVAS DE CAPELIN')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SHIMEJI</b><br>
+            Estoque: <input type="number" id="stock_SHIMEJI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SHIMEJI')">-</button>
+            <span id="q_SHIMEJI">0</span>
+            <button onclick="mais('SHIMEJI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SHITAKE</b><br>
+            Estoque: <input type="number" id="stock_SHITAKE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SHITAKE')">-</button>
+            <span id="q_SHITAKE">0</span>
+            <button onclick="mais('SHITAKE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>TOFU</b><br>
+            Estoque: <input type="number" id="stock_TOFU" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('TOFU')">-</button>
+            <span id="q_TOFU">0</span>
+            <button onclick="mais('TOFU')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ATUM</b><br>
+            Estoque: <input type="number" id="stock_ATUM" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ATUM')">-</button>
+            <span id="q_ATUM">0</span>
+            <button onclick="mais('ATUM')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CAMARÃO COM CASCA</b><br>
+            Estoque: <input type="number" id="stock_CAMARÃO COM CASCA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CAMARÃO COM CASCA')">-</button>
+            <span id="q_CAMARÃO COM CASCA">0</span>
+            <button onclick="mais('CAMARÃO COM CASCA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CAMARÃO SEM CASCA</b><br>
+            Estoque: <input type="number" id="stock_CAMARÃO SEM CASCA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CAMARÃO SEM CASCA')">-</button>
+            <span id="q_CAMARÃO SEM CASCA">0</span>
+            <button onclick="mais('CAMARÃO SEM CASCA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>KANEKAMA</b><br>
+            Estoque: <input type="number" id="stock_KANEKAMA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('KANEKAMA')">-</button>
+            <span id="q_KANEKAMA">0</span>
+            <button onclick="mais('KANEKAMA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LULA TENTÁCULOS</b><br>
+            Estoque: <input type="number" id="stock_LULA TENTÁCULOS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LULA TENTÁCULOS')">-</button>
+            <span id="q_LULA TENTÁCULOS">0</span>
+            <button onclick="mais('LULA TENTÁCULOS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LULA EM ANÉIS</b><br>
+            Estoque: <input type="number" id="stock_LULA EM ANÉIS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LULA EM ANÉIS')">-</button>
+            <span id="q_LULA EM ANÉIS">0</span>
+            <button onclick="mais('LULA EM ANÉIS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PEIXE PREGO</b><br>
+            Estoque: <input type="number" id="stock_PEIXE PREGO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PEIXE PREGO')">-</button>
+            <span id="q_PEIXE PREGO">0</span>
+            <button onclick="mais('PEIXE PREGO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POLVO</b><br>
+            Estoque: <input type="number" id="stock_POLVO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POLVO')">-</button>
+            <span id="q_POLVO">0</span>
+            <button onclick="mais('POLVO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SALMÃO (CAIXAS)</b><br>
+            Estoque: <input type="number" id="stock_SALMÃO (CAIXAS)" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SALMÃO (CAIXAS)')">-</button>
+            <span id="q_SALMÃO (CAIXAS)">0</span>
+            <button onclick="mais('SALMÃO (CAIXAS)')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>TILÁPIA</b><br>
+            Estoque: <input type="number" id="stock_TILÁPIA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('TILÁPIA')">-</button>
+            <span id="q_TILÁPIA">0</span>
+            <button onclick="mais('TILÁPIA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BRÓCOLIS</b><br>
+            Estoque: <input type="number" id="stock_BRÓCOLIS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BRÓCOLIS')">-</button>
+            <span id="q_BRÓCOLIS">0</span>
+            <button onclick="mais('BRÓCOLIS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>REQUEIJÃO</b><br>
+            Estoque: <input type="number" id="stock_REQUEIJÃO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('REQUEIJÃO')">-</button>
+            <span id="q_REQUEIJÃO">0</span>
+            <button onclick="mais('REQUEIJÃO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CREAM CHEESE</b><br>
+            Estoque: <input type="number" id="stock_CREAM CHEESE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CREAM CHEESE')">-</button>
+            <span id="q_CREAM CHEESE">0</span>
+            <button onclick="mais('CREAM CHEESE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>FILÉ MIGNON</b><br>
+            Estoque: <input type="number" id="stock_FILÉ MIGNON" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('FILÉ MIGNON')">-</button>
+            <span id="q_FILÉ MIGNON">0</span>
+            <button onclick="mais('FILÉ MIGNON')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>FRANGO SASSAMI</b><br>
+            Estoque: <input type="number" id="stock_FRANGO SASSAMI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('FRANGO SASSAMI')">-</button>
+            <span id="q_FRANGO SASSAMI">0</span>
+            <button onclick="mais('FRANGO SASSAMI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MASSA DE PASTEL</b><br>
+            Estoque: <input type="number" id="stock_MASSA DE PASTEL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MASSA DE PASTEL')">-</button>
+            <span id="q_MASSA DE PASTEL">0</span>
+            <button onclick="mais('MASSA DE PASTEL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MUSSARELA</b><br>
+            Estoque: <input type="number" id="stock_MUSSARELA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MUSSARELA')">-</button>
+            <span id="q_MUSSARELA">0</span>
+            <button onclick="mais('MUSSARELA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PETIT GATEAU</b><br>
+            Estoque: <input type="number" id="stock_PETIT GATEAU" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PETIT GATEAU')">-</button>
+            <span id="q_PETIT GATEAU">0</span>
+            <button onclick="mais('PETIT GATEAU')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PICANHA</b><br>
+            Estoque: <input type="number" id="stock_PICANHA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PICANHA')">-</button>
+            <span id="q_PICANHA">0</span>
+            <button onclick="mais('PICANHA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BATATA PALITO</b><br>
+            Estoque: <input type="number" id="stock_BATATA PALITO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BATATA PALITO')">-</button>
+            <span id="q_BATATA PALITO">0</span>
+            <button onclick="mais('BATATA PALITO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CARNE DE MISTURA</b><br>
+            Estoque: <input type="number" id="stock_CARNE DE MISTURA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CARNE DE MISTURA')">-</button>
+            <span id="q_CARNE DE MISTURA">0</span>
+            <button onclick="mais('CARNE DE MISTURA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HAMBURGUER</b><br>
+            Estoque: <input type="number" id="stock_HAMBURGUER" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HAMBURGUER')">-</button>
+            <span id="q_HAMBURGUER">0</span>
+            <button onclick="mais('HAMBURGUER')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POLPA ABACAXI</b><br>
+            Estoque: <input type="number" id="stock_POLPA ABACAXI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POLPA ABACAXI')">-</button>
+            <span id="q_POLPA ABACAXI">0</span>
+            <button onclick="mais('POLPA ABACAXI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POLPA FRUTAS VERMELHAS</b><br>
+            Estoque: <input type="number" id="stock_POLPA FRUTAS VERMELHAS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POLPA FRUTAS VERMELHAS')">-</button>
+            <span id="q_POLPA FRUTAS VERMELHAS">0</span>
+            <button onclick="mais('POLPA FRUTAS VERMELHAS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POLPA MARACUJÁ</b><br>
+            Estoque: <input type="number" id="stock_POLPA MARACUJÁ" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POLPA MARACUJÁ')">-</button>
+            <span id="q_POLPA MARACUJÁ">0</span>
+            <button onclick="mais('POLPA MARACUJÁ')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SORVETE</b><br>
+            Estoque: <input type="number" id="stock_SORVETE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SORVETE')">-</button>
+            <span id="q_SORVETE">0</span>
+            <button onclick="mais('SORVETE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>polpa de morango</b><br>
+            Estoque: <input type="number" id="stock_polpa de morango" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('polpa de morango')">-</button>
+            <span id="q_polpa de morango">0</span>
+            <button onclick="mais('polpa de morango')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ÁGUA SANITÁRIA</b><br>
+            Estoque: <input type="number" id="stock_ÁGUA SANITÁRIA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ÁGUA SANITÁRIA')">-</button>
+            <span id="q_ÁGUA SANITÁRIA">0</span>
+            <button onclick="mais('ÁGUA SANITÁRIA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BUCHA COZINHA</b><br>
+            Estoque: <input type="number" id="stock_BUCHA COZINHA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BUCHA COZINHA')">-</button>
+            <span id="q_BUCHA COZINHA">0</span>
+            <button onclick="mais('BUCHA COZINHA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>DESINFETANTE</b><br>
+            Estoque: <input type="number" id="stock_DESINFETANTE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('DESINFETANTE')">-</button>
+            <span id="q_DESINFETANTE">0</span>
+            <button onclick="mais('DESINFETANTE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>DETERGENTE</b><br>
+            Estoque: <input type="number" id="stock_DETERGENTE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('DETERGENTE')">-</button>
+            <span id="q_DETERGENTE">0</span>
+            <button onclick="mais('DETERGENTE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GLADE</b><br>
+            Estoque: <input type="number" id="stock_GLADE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GLADE')">-</button>
+            <span id="q_GLADE">0</span>
+            <button onclick="mais('GLADE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LIMPA VIDRO</b><br>
+            Estoque: <input type="number" id="stock_LIMPA VIDRO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LIMPA VIDRO')">-</button>
+            <span id="q_LIMPA VIDRO">0</span>
+            <button onclick="mais('LIMPA VIDRO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LUSTRA MÓVEIS</b><br>
+            Estoque: <input type="number" id="stock_LUSTRA MÓVEIS" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LUSTRA MÓVEIS')">-</button>
+            <span id="q_LUSTRA MÓVEIS">0</span>
+            <button onclick="mais('LUSTRA MÓVEIS')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SABÃO EM PÓ</b><br>
+            Estoque: <input type="number" id="stock_SABÃO EM PÓ" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SABÃO EM PÓ')">-</button>
+            <span id="q_SABÃO EM PÓ">0</span>
+            <button onclick="mais('SABÃO EM PÓ')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ÁLCOOL 70 GEL</b><br>
+            Estoque: <input type="number" id="stock_ÁLCOOL 70 GEL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ÁLCOOL 70 GEL')">-</button>
+            <span id="q_ÁLCOOL 70 GEL">0</span>
+            <button onclick="mais('ÁLCOOL 70 GEL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ÁLCOOL 70 LIQUIDO</b><br>
+            Estoque: <input type="number" id="stock_ÁLCOOL 70 LIQUIDO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ÁLCOOL 70 LIQUIDO')">-</button>
+            <span id="q_ÁLCOOL 70 LIQUIDO">0</span>
+            <button onclick="mais('ÁLCOOL 70 LIQUIDO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ÁLCOOL 92</b><br>
+            Estoque: <input type="number" id="stock_ÁLCOOL 92" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ÁLCOOL 92')">-</button>
+            <span id="q_ÁLCOOL 92">0</span>
+            <button onclick="mais('ÁLCOOL 92')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BOBINA IMPRESSORA</b><br>
+            Estoque: <input type="number" id="stock_BOBINA IMPRESSORA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BOBINA IMPRESSORA')">-</button>
+            <span id="q_BOBINA IMPRESSORA">0</span>
+            <button onclick="mais('BOBINA IMPRESSORA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BOBINA MAQUININHA</b><br>
+            Estoque: <input type="number" id="stock_BOBINA MAQUININHA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BOBINA MAQUININHA')">-</button>
+            <span id="q_BOBINA MAQUININHA">0</span>
+            <button onclick="mais('BOBINA MAQUININHA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BOBINA PICOTADA 20X30</b><br>
+            Estoque: <input type="number" id="stock_BOBINA PICOTADA 20X30" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BOBINA PICOTADA 20X30')">-</button>
+            <span id="q_BOBINA PICOTADA 20X30">0</span>
+            <button onclick="mais('BOBINA PICOTADA 20X30')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BOBINA PICOTADA 35X45</b><br>
+            Estoque: <input type="number" id="stock_BOBINA PICOTADA 35X45" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BOBINA PICOTADA 35X45')">-</button>
+            <span id="q_BOBINA PICOTADA 35X45">0</span>
+            <button onclick="mais('BOBINA PICOTADA 35X45')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>BUCHA LIMPA GRILL</b><br>
+            Estoque: <input type="number" id="stock_BUCHA LIMPA GRILL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('BUCHA LIMPA GRILL')">-</button>
+            <span id="q_BUCHA LIMPA GRILL">0</span>
+            <button onclick="mais('BUCHA LIMPA GRILL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CANUDO FINO 6 mm</b><br>
+            Estoque: <input type="number" id="stock_CANUDO FINO 6 mm" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CANUDO FINO 6 mm')">-</button>
+            <span id="q_CANUDO FINO 6 mm">0</span>
+            <button onclick="mais('CANUDO FINO 6 mm')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CANUDO GROSSO 8 mm</b><br>
+            Estoque: <input type="number" id="stock_CANUDO GROSSO 8 mm" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CANUDO GROSSO 8 mm')">-</button>
+            <span id="q_CANUDO GROSSO 8 mm">0</span>
+            <button onclick="mais('CANUDO GROSSO 8 mm')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>COPO 300 ML</b><br>
+            Estoque: <input type="number" id="stock_COPO 300 ML" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('COPO 300 ML')">-</button>
+            <span id="q_COPO 300 ML">0</span>
+            <button onclick="mais('COPO 300 ML')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>copo café</b><br>
+            Estoque: <input type="number" id="stock_copo café" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('copo café')">-</button>
+            <span id="q_copo café">0</span>
+            <button onclick="mais('copo café')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ENXAGUANTE BUCAL</b><br>
+            Estoque: <input type="number" id="stock_ENXAGUANTE BUCAL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ENXAGUANTE BUCAL')">-</button>
+            <span id="q_ENXAGUANTE BUCAL">0</span>
+            <button onclick="mais('ENXAGUANTE BUCAL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ETIQUETA DE DATA</b><br>
+            Estoque: <input type="number" id="stock_ETIQUETA DE DATA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ETIQUETA DE DATA')">-</button>
+            <span id="q_ETIQUETA DE DATA">0</span>
+            <button onclick="mais('ETIQUETA DE DATA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GARRAFINHA SUCO</b><br>
+            Estoque: <input type="number" id="stock_GARRAFINHA SUCO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GARRAFINHA SUCO')">-</button>
+            <span id="q_GARRAFINHA SUCO">0</span>
+            <button onclick="mais('GARRAFINHA SUCO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GUARDANAPO EMBALADO</b><br>
+            Estoque: <input type="number" id="stock_GUARDANAPO EMBALADO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GUARDANAPO EMBALADO')">-</button>
+            <span id="q_GUARDANAPO EMBALADO">0</span>
+            <button onclick="mais('GUARDANAPO EMBALADO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>GUARDANAPO PEROLA</b><br>
+            Estoque: <input type="number" id="stock_GUARDANAPO PEROLA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('GUARDANAPO PEROLA')">-</button>
+            <span id="q_GUARDANAPO PEROLA">0</span>
+            <button onclick="mais('GUARDANAPO PEROLA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HF 100 / 4 DIV. BASE</b><br>
+            Estoque: <input type="number" id="stock_HF 100 / 4 DIV. BASE" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HF 100 / 4 DIV. BASE')">-</button>
+            <span id="q_HF 100 / 4 DIV. BASE">0</span>
+            <button onclick="mais('HF 100 / 4 DIV. BASE')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HF 100 TAMPA</b><br>
+            Estoque: <input type="number" id="stock_HF 100 TAMPA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HF 100 TAMPA')">-</button>
+            <span id="q_HF 100 TAMPA">0</span>
+            <button onclick="mais('HF 100 TAMPA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HF 70 BASE – TEPPAN</b><br>
+            Estoque: <input type="number" id="stock_HF 70 BASE – TEPPAN" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HF 70 BASE – TEPPAN')">-</button>
+            <span id="q_HF 70 BASE – TEPPAN">0</span>
+            <button onclick="mais('HF 70 BASE – TEPPAN')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HF 70 TAMPA</b><br>
+            Estoque: <input type="number" id="stock_HF 70 TAMPA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HF 70 TAMPA')">-</button>
+            <span id="q_HF 70 TAMPA">0</span>
+            <button onclick="mais('HF 70 TAMPA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LUVA NITRICA PRETA</b><br>
+            Estoque: <input type="number" id="stock_LUVA NITRICA PRETA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LUVA NITRICA PRETA')">-</button>
+            <span id="q_LUVA NITRICA PRETA">0</span>
+            <button onclick="mais('LUVA NITRICA PRETA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>LUVA LIMPEZA AMARELA</b><br>
+            Estoque: <input type="number" id="stock_LUVA LIMPEZA AMARELA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('LUVA LIMPEZA AMARELA')">-</button>
+            <span id="q_LUVA LIMPEZA AMARELA">0</span>
+            <button onclick="mais('LUVA LIMPEZA AMARELA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PALITO DENTE EMBALAD</b><br>
+            Estoque: <input type="number" id="stock_PALITO DENTE EMBALAD" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PALITO DENTE EMBALAD')">-</button>
+            <span id="q_PALITO DENTE EMBALAD">0</span>
+            <button onclick="mais('PALITO DENTE EMBALAD')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PALITO DENTE GRANEL</b><br>
+            Estoque: <input type="number" id="stock_PALITO DENTE GRANEL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PALITO DENTE GRANEL')">-</button>
+            <span id="q_PALITO DENTE GRANEL">0</span>
+            <button onclick="mais('PALITO DENTE GRANEL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PANO DE CHÃO</b><br>
+            Estoque: <input type="number" id="stock_PANO DE CHÃO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PANO DE CHÃO')">-</button>
+            <span id="q_PANO DE CHÃO">0</span>
+            <button onclick="mais('PANO DE CHÃO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PANO PERFEX</b><br>
+            Estoque: <input type="number" id="stock_PANO PERFEX" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PANO PERFEX')">-</button>
+            <span id="q_PANO PERFEX">0</span>
+            <button onclick="mais('PANO PERFEX')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PAPEL HIGIÊNICO</b><br>
+            Estoque: <input type="number" id="stock_PAPEL HIGIÊNICO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PAPEL HIGIÊNICO')">-</button>
+            <span id="q_PAPEL HIGIÊNICO">0</span>
+            <button onclick="mais('PAPEL HIGIÊNICO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PAPEL TOALHA BANHEI.</b><br>
+            Estoque: <input type="number" id="stock_PAPEL TOALHA BANHEI." disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PAPEL TOALHA BANHEI.')">-</button>
+            <span id="q_PAPEL TOALHA BANHEI.">0</span>
+            <button onclick="mais('PAPEL TOALHA BANHEI.')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PLÁSTICO FILME</b><br>
+            Estoque: <input type="number" id="stock_PLÁSTICO FILME" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PLÁSTICO FILME')">-</button>
+            <span id="q_PLÁSTICO FILME">0</span>
+            <button onclick="mais('PLÁSTICO FILME')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POTE SUNOMONO</b><br>
+            Estoque: <input type="number" id="stock_POTE SUNOMONO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POTE SUNOMONO')">-</button>
+            <span id="q_POTE SUNOMONO">0</span>
+            <button onclick="mais('POTE SUNOMONO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POTE POKE G681</b><br>
+            Estoque: <input type="number" id="stock_POTE POKE G681" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POTE POKE G681')">-</button>
+            <span id="q_POTE POKE G681">0</span>
+            <button onclick="mais('POTE POKE G681')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POTE POKE G684</b><br>
+            Estoque: <input type="number" id="stock_POTE POKE G684" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POTE POKE G684')">-</button>
+            <span id="q_POTE POKE G684">0</span>
+            <button onclick="mais('POTE POKE G684')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>POTE TARÊ G 695 BRAN</b><br>
+            Estoque: <input type="number" id="stock_POTE TARÊ G 695 BRAN" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('POTE TARÊ G 695 BRAN')">-</button>
+            <span id="q_POTE TARÊ G 695 BRAN">0</span>
+            <button onclick="mais('POTE TARÊ G 695 BRAN')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>REMOVEDOR MÁGICO</b><br>
+            Estoque: <input type="number" id="stock_REMOVEDOR MÁGICO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('REMOVEDOR MÁGICO')">-</button>
+            <span id="q_REMOVEDOR MÁGICO">0</span>
+            <button onclick="mais('REMOVEDOR MÁGICO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SABONETE LÍQUIDO</b><br>
+            Estoque: <input type="number" id="stock_SABONETE LÍQUIDO" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SABONETE LÍQUIDO')">-</button>
+            <span id="q_SABONETE LÍQUIDO">0</span>
+            <button onclick="mais('SABONETE LÍQUIDO')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SACHÊ DE AÇÚCAR</b><br>
+            Estoque: <input type="number" id="stock_SACHÊ DE AÇÚCAR" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SACHÊ DE AÇÚCAR')">-</button>
+            <span id="q_SACHÊ DE AÇÚCAR">0</span>
+            <button onclick="mais('SACHÊ DE AÇÚCAR')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SACHÊ DE SAL</b><br>
+            Estoque: <input type="number" id="stock_SACHÊ DE SAL" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SACHÊ DE SAL')">-</button>
+            <span id="q_SACHÊ DE SAL">0</span>
+            <button onclick="mais('SACHÊ DE SAL')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SACO DE LIXO 200 L</b><br>
+            Estoque: <input type="number" id="stock_SACO DE LIXO 200 L" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SACO DE LIXO 200 L')">-</button>
+            <span id="q_SACO DE LIXO 200 L">0</span>
+            <button onclick="mais('SACO DE LIXO 200 L')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SACO DE LIXO 40 L</b><br>
+            Estoque: <input type="number" id="stock_SACO DE LIXO 40 L" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SACO DE LIXO 40 L')">-</button>
+            <span id="q_SACO DE LIXO 40 L">0</span>
+            <button onclick="mais('SACO DE LIXO 40 L')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SACO TALHER</b><br>
+            Estoque: <input type="number" id="stock_SACO TALHER" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SACO TALHER')">-</button>
+            <span id="q_SACO TALHER">0</span>
+            <button onclick="mais('SACO TALHER')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>TOUCA</b><br>
+            Estoque: <input type="number" id="stock_TOUCA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('TOUCA')">-</button>
+            <span id="q_TOUCA">0</span>
+            <button onclick="mais('TOUCA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>EMB. CAIXA G DELIVERY</b><br>
+            Estoque: <input type="number" id="stock_EMB. CAIXA G DELIVERY" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('EMB. CAIXA G DELIVERY')">-</button>
+            <span id="q_EMB. CAIXA G DELIVERY">0</span>
+            <button onclick="mais('EMB. CAIXA G DELIVERY')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>EMB. CAIXA P DELIVERY</b><br>
+            Estoque: <input type="number" id="stock_EMB. CAIXA P DELIVERY" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('EMB. CAIXA P DELIVERY')">-</button>
+            <span id="q_EMB. CAIXA P DELIVERY">0</span>
+            <button onclick="mais('EMB. CAIXA P DELIVERY')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>EMB. SACOLA DELIVERY</b><br>
+            Estoque: <input type="number" id="stock_EMB. SACOLA DELIVERY" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('EMB. SACOLA DELIVERY')">-</button>
+            <span id="q_EMB. SACOLA DELIVERY">0</span>
+            <button onclick="mais('EMB. SACOLA DELIVERY')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>TEMAKEIRA</b><br>
+            Estoque: <input type="number" id="stock_TEMAKEIRA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('TEMAKEIRA')">-</button>
+            <span id="q_TEMAKEIRA">0</span>
+            <button onclick="mais('TEMAKEIRA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>CAIXA YAKISSOBA</b><br>
+            Estoque: <input type="number" id="stock_CAIXA YAKISSOBA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('CAIXA YAKISSOBA')">-</button>
+            <span id="q_CAIXA YAKISSOBA">0</span>
+            <button onclick="mais('CAIXA YAKISSOBA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ETIQUETA</b><br>
+            Estoque: <input type="number" id="stock_ETIQUETA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ETIQUETA')">-</button>
+            <span id="q_ETIQUETA">0</span>
+            <button onclick="mais('ETIQUETA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>ADESIVO LACRE DELIVERY</b><br>
+            Estoque: <input type="number" id="stock_ADESIVO LACRE DELIVERY" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('ADESIVO LACRE DELIVERY')">-</button>
+            <span id="q_ADESIVO LACRE DELIVERY">0</span>
+            <button onclick="mais('ADESIVO LACRE DELIVERY')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>MÁSCARA</b><br>
+            Estoque: <input type="number" id="stock_MÁSCARA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('MÁSCARA')">-</button>
+            <span id="q_MÁSCARA">0</span>
+            <button onclick="mais('MÁSCARA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>PALITO ROBATA</b><br>
+            Estoque: <input type="number" id="stock_PALITO ROBATA" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('PALITO ROBATA')">-</button>
+            <span id="q_PALITO ROBATA">0</span>
+            <button onclick="mais('PALITO ROBATA')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>HASHI</b><br>
+            Estoque: <input type="number" id="stock_HASHI" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('HASHI')">-</button>
+            <span id="q_HASHI">0</span>
+            <button onclick="mais('HASHI')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>Shoyu primium</b><br>
+            Estoque: <input type="number" id="stock_Shoyu primium" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('Shoyu primium')">-</button>
+            <span id="q_Shoyu primium">0</span>
+            <button onclick="mais('Shoyu primium')">+</button>
+        </div>
+    </div>
+    
+    <div class="item">
+        <div>
+            <b>SHOYU LIGHT</b><br>
+            Estoque: <input type="number" id="stock_SHOYU LIGHT" disabled style="width:70px">
+        </div>
+        <div class="controls">
+            <button onclick="menos('SHOYU LIGHT')">-</button>
+            <span id="q_SHOYU LIGHT">0</span>
+            <button onclick="mais('SHOYU LIGHT')">+</button>
+        </div>
+    </div>
+    
+</div>
+
+<button class="fab" onclick="toggleMenu()" id="lockBtn">🔒</button>
+
+<div class="fab-menu" id="fabMenu">
+ <button style="background:#ff5722;color:white" onclick="desbloquear()">Quantidade em estoque alterar</button>
+ <button style="background:#2196f3;color:white;display:none" id="saveBtn" onclick="salvarEstoque()">Salvar estoque</button>
+ <button style="background:#4caf50;color:white" onclick="relatorioPDF()">Relatório semanal PDF</button>
+ <button style="display:none" onclick="pedidoFornecedor()"><button style="background:#03a9f4;color:white" onclick="abrirListaCompra()">Pedidos da Semana</button>
+</div>
+
+<button class="send" onclick="enviar()">Enviar e dar baixa</button>
+
+<script>
+const SENHA="864300"; // ALTERE AQUI
+
+let retirada=JSON.parse(localStorage.getItem("retirada"))||{};
+let estoque=JSON.parse(localStorage.getItem("estoqueAtual"))||{};
+let desbloqueado=false;
+
+function toggleMenu(){
+ let m=document.getElementById("fabMenu");
+ m.style.display = m.style.display==="block" ? "none" : "block";
+}
+
+function desbloquear(){
+ let s=prompt("Digite a senha:");
+ if(s===SENHA){
+   desbloqueado=true;
+   document.querySelectorAll("input[id^='stock_']").forEach(i=>i.disabled=false);
+   document.getElementById("saveBtn").style.display="block";
+   document.getElementById("lockBtn").innerText="🔓";
+   alert("Edição liberada");
+ }else{
+   alert("Senha incorreta");
+ }
+}
+
+function salvarEstoque(){
+ document.querySelectorAll("input[id^='stock_']").forEach(i=>{
+   let nome=i.id.replace("stock_","");
+   estoque[nome]=parseInt(i.value)||0;
+   i.disabled=true;
+ });
+ localStorage.setItem("estoqueAtual",JSON.stringify(estoque));
+ desbloqueado=false;
+ document.getElementById("saveBtn").style.display="none";
+ document.getElementById("lockBtn").innerText="🔒";
+ document.getElementById("fabMenu").style.display="none";
+ alert("Estoque salvo!");
+}
+
+function atualizar(p){
+ document.getElementById("q_"+p).innerText=retirada[p]||0;
+ document.getElementById("stock_"+p).value=estoque[p]||0;
+}
+
+function mais(p){
+ retirada[p]=(retirada[p]||0)+1;
+ localStorage.setItem("retirada",JSON.stringify(retirada));
+ atualizar(p);
+}
+
+function menos(p){
+ retirada[p]=Math.max((retirada[p]||0)-1,0);
+ localStorage.setItem("retirada",JSON.stringify(retirada));
+ atualizar(p);
+}
+
+function enviar(){
+ let msg="Baixa de estoque:%0A%0A";
+ let vazio=true;
+ for(let p in retirada){
+   if(retirada[p]>0){
+     msg+="- "+p+": "+retirada[p]+"%0A";
+     estoque[p]=(estoque[p]||0)-retirada[p];
+     vazio=false;
+   }
+ }
+ if(vazio){alert("Nenhum item");return;}
+ localStorage.setItem("estoqueAtual",JSON.stringify(estoque));
+ retirada={};
+ localStorage.setItem("retirada","{}");
+ window.open("https://wa.me/551634423799?text="+msg,"_blank");
+ location.reload();
+}
+
+window.onload=()=>{
+ for(let p of ['ALGA', 'AMÊNDOAS', 'ARROZ JAPONÊS', 'BANCHA', 'CASTANHA DE CAJU', 'GALÃO DE SHOYU 20 L', 'GÁS MAÇARICO', 'GENGIBRE', 'GERGELIM', 'HONDASHI', 'MACARRÃO YAKISSOBA', 'MISSOSHIRO BARCO', 'MOLHO AGRIDOCE', 'OLEO GERGELIM', 'PANKO', 'PIMENTA SRIRACHA', 'SAQUE DOURADO', 'SAQUE SOFT', 'SAQUE MIRIM CULINARIO', 'VINAGRE de arroz', 'WASABI', 'AÇÚCAR NORMAL', 'AÇÚCAR REFINADO', 'ADOÇANTE', 'AMIDO DE MILHO', 'ARROZ NORMAL', 'AZEITE', 'AZEITE TRUFADO', 'CAFÉ', 'CAFÉ DE MÁQUINA', 'CALDA DE SORVETE', 'CÁPSULA DE GÁS', 'CHOCOLATE EM PÓ', 'CREME DE LEITE', 'COCO RALADO', 'DOCE DE LEITE', 'DOCE DE LEITE CHOCO.', 'DORITOS', 'FARINHA DE TRIGO', 'farofa', 'FEIJÃO', 'FEIJÃO PRETO', 'GOIABADA', 'LEITE', 'LEITE CONDENSADO', 'MACARRÃO', 'MAIONESE', 'MARGARINA 15 KG', 'MOLHO DE TOMATE', 'MOSTARDA', 'ÓLEO', 'PALITO DE CHURRASCO', 'PIMENTA BIQUINHO', 'PIMENTA DO REINO', 'SAL NORMAL', 'SAL HIMALAIA', 'TOMATE SECO', 'VINAGRE', 'MEL', 'EDAMAME', 'GUIOZA BOVINA', 'GUIOZA SUÍNA', 'MASSA HARUMAKI', 'OVAS DE CAPELIN', 'SHIMEJI', 'SHITAKE', 'TOFU', 'ATUM', 'CAMARÃO COM CASCA', 'CAMARÃO SEM CASCA', 'KANEKAMA', 'LULA TENTÁCULOS', 'LULA EM ANÉIS', 'PEIXE PREGO', 'POLVO', 'SALMÃO (CAIXAS)', 'TILÁPIA', 'BRÓCOLIS', 'REQUEIJÃO', 'CREAM CHEESE', 'FILÉ MIGNON', 'FRANGO SASSAMI', 'MASSA DE PASTEL', 'MUSSARELA', 'PETIT GATEAU', 'PICANHA', 'BATATA PALITO', 'CARNE DE MISTURA', 'HAMBURGUER', 'POLPA ABACAXI', 'POLPA FRUTAS VERMELHAS', 'POLPA MARACUJÁ', 'SORVETE', 'polpa de morango', 'ÁGUA SANITÁRIA', 'BUCHA COZINHA', 'DESINFETANTE', 'DETERGENTE', 'GLADE', 'LIMPA VIDRO', 'LUSTRA MÓVEIS', 'SABÃO EM PÓ', 'ÁLCOOL 70 GEL', 'ÁLCOOL 70 LIQUIDO', 'ÁLCOOL 92', 'BOBINA IMPRESSORA', 'BOBINA MAQUININHA', 'BOBINA PICOTADA 20X30', 'BOBINA PICOTADA 35X45', 'BUCHA LIMPA GRILL', 'CANUDO FINO 6 mm', 'CANUDO GROSSO 8 mm', 'COPO 300 ML', 'copo café', 'ENXAGUANTE BUCAL', 'ETIQUETA DE DATA', 'GARRAFINHA SUCO', 'GUARDANAPO EMBALADO', 'GUARDANAPO PEROLA', 'HF 100 / 4 DIV. BASE', 'HF 100 TAMPA', 'HF 70 BASE – TEPPAN', 'HF 70 TAMPA', 'LUVA NITRICA PRETA', 'LUVA LIMPEZA AMARELA', 'PALITO DENTE EMBALAD', 'PALITO DENTE GRANEL', 'PANO DE CHÃO', 'PANO PERFEX', 'PAPEL HIGIÊNICO', 'PAPEL TOALHA BANHEI.', 'PLÁSTICO FILME', 'POTE SUNOMONO', 'POTE POKE G681', 'POTE POKE G684', 'POTE TARÊ G 695 BRAN', 'REMOVEDOR MÁGICO', 'SABONETE LÍQUIDO', 'SACHÊ DE AÇÚCAR', 'SACHÊ DE SAL', 'SACO DE LIXO 200 L', 'SACO DE LIXO 40 L', 'SACO TALHER', 'TOUCA', 'EMB. CAIXA G DELIVERY', 'EMB. CAIXA P DELIVERY', 'EMB. SACOLA DELIVERY', 'TEMAKEIRA', 'CAIXA YAKISSOBA', 'ETIQUETA', 'ADESIVO LACRE DELIVERY', 'MÁSCARA', 'PALITO ROBATA', 'HASHI', 'Shoyu primium', 'SHOYU LIGHT']){
+   atualizar(p);
+ }
+}
+
+function relatorioPDF(){
+ if(prompt("Senha gerente:")!==SENHA) return alert("Senha incorreta");
+ var hist=JSON.parse(localStorage.getItem("historico")||"[]");
+ var hoje=new Date(); var soma={};
+ hist.forEach(h=>{
+  if(!h.data||!h.texto) return;
+  var p=h.data.split('/'); var d=new Date(p[2],p[1]-1,p[0]);
+  if((hoje-d)/(1000*60*60*24)<=7){
+    decodeURIComponent(h.texto).split("\n").forEach(l=>{
+      var m=l.match(/^(.*):\s*(\d+)/);
+      if(m){var k=m[1].trim(); soma[k]=(soma[k]||0)+parseInt(m[2]);}
+    });
+  }
+ });
+ var w=window.open("");
+ var txt="<h2>RELATÓRIO SEMANAL</h2>";
+ Object.keys(soma).sort().forEach(k=>txt+=k+": "+soma[k]+"<br>");
+ if(Object.keys(soma).length===0) txt+="Sem dados";
+ w.document.write(txt); w.print();
+}
+
+
+function pintarEstoque(){
+ document.querySelectorAll("input[id^='stock_']").forEach(i=>{
+   var v=parseFloat(i.value||0);
+   if(v<=2){ i.style.color="#ff3b3b"; i.style.fontWeight="bold"; }
+   else{ i.style.color="#ffffff"; i.style.fontWeight="bold"; i.style.background="#2ecc71"; i.style.borderRadius="6px"; padding="2px 6px"; }
+ });
+}
+setInterval(pintarEstoque,500);
+document.addEventListener("DOMContentLoaded",pintarEstoque);
+
+
+function pedidoFornecedor(){
+ if(prompt("Senha gerente:")!==SENHA) return alert("Senha incorreta");
+ let txt="Pedido para fornecedor:\n\n";
+ let encontrou=false;
+ document.querySelectorAll("input[id^='stock_']").forEach(i=>{
+   let q=parseFloat(i.value||0);
+   if(q<=2){
+     let nome=i.id.replace("stock_","");
+     let sugerido=Math.max(5-q,1);
+     txt+=nome+": "+sugerido+"\n";
+     encontrou=true;
+   }
+ });
+ if(!encontrou){alert("Nenhum item em falta");return;}
+ let url="https://wa.me/?text="+encodeURIComponent(txt);
+ window.location.href=url;
+}
+
+
+let selecionados=new Set();
+function montarSeletores(){
+ document.querySelectorAll("input[id^='stock_']").forEach(i=>{
+   if(i.dataset.sel) return;
+   i.dataset.sel=1;
+   const cb=document.createElement("input");
+   cb.type="hidden";
+   cb.style.marginRight="6px";
+   cb.onchange=()=>{ if(cb.checked) selecionados.add(i.id.replace("stock_","")); else selecionados.delete(i.id.replace("stock_","")); };
+   i.parentElement.insertBefore(cb,i);
+ });
+}
+document.addEventListener("DOMContentLoaded",montarSeletores);
+setTimeout(montarSeletores,800);
+
+function abrirListaCompra(){
+ if(prompt("Senha gerente:")!==SENHA) return alert("Senha incorreta");
+ if(selecionados.size===0) return alert("Nenhum item selecionado");
+ let txt="Lista para cotação:\n\n";
+ selecionados.forEach(n=>txt+=n+"\n");
+ var url="https://wa.me/?text="+encodeURIComponent(txt); window.location.href=url;
+}
+
+
+
+let compraSelecionados = {};
+
+function abrirListaCompra(){
+ if(prompt("Senha gerente:")!==SENHA) return alert("Senha incorreta");
+
+ let modal=document.createElement("div");
+ modal.style.position="fixed";
+ modal.style.top="0";
+ modal.style.left="0";
+ modal.style.width="100%";
+ modal.style.height="100%";
+ modal.style.background="rgba(0,0,0,0.8)";
+ modal.style.overflow="auto";
+ modal.style.zIndex="9999";
+
+ let box=document.createElement("div");
+ box.style.background="#111";
+ box.style.margin="40px auto";
+ box.style.padding="20px";
+ box.style.width="90%";
+ box.style.borderRadius="10px";
+ box.style.color="white";
+
+ box.innerHTML="<h3>Selecionar produtos para compra</h3>";
+
+ document.querySelectorAll("input[id^='stock_']").forEach(i=>{
+   let nome=i.id.replace("stock_","");
+   let linha=document.createElement("div");
+   linha.style.display="flex";
+   linha.style.justifyContent="space-between";
+   linha.style.marginBottom="8px";
+
+   let label=document.createElement("span");
+   label.innerText=nome;
+
+   let qtd=document.createElement("input");
+   qtd.type="number";
+   qtd.min="0";
+   qtd.value="0";
+   qtd.style.width="70px";
+
+   qtd.onchange=()=>{ 
+     if(parseInt(qtd.value)>0) compraSelecionados[nome]=qtd.value;
+     else delete compraSelecionados[nome];
+   };
+
+   linha.appendChild(label);
+   linha.appendChild(qtd);
+   box.appendChild(linha);
+ });
+
+ let enviar=document.createElement("button");
+ enviar.innerText="Enviar para WhatsApp";
+ enviar.style.background="#25D366";
+ enviar.style.color="white";
+ enviar.style.width="100%";
+ enviar.style.marginTop="15px";
+ enviar.onclick=()=>{
+   if(Object.keys(compraSelecionados).length===0){
+     alert("Nenhum produto selecionado");
+     return;
+   }
+   let txt="Pedido de compra:\n\n";
+   Object.keys(compraSelecionados).forEach(p=>{
+     txt+=p+": "+compraSelecionados[p]+"\n";
+   });
+   let url="https://wa.me/?text="+encodeURIComponent(txt);
+   window.location.href=url;
+ };
+
+ let cancelar=document.createElement("button");
+ cancelar.innerText="Cancelar";
+ cancelar.style.marginTop="10px";
+ cancelar.style.width="100%";
+ cancelar.onclick=()=>modal.remove();
+
+ box.appendChild(enviar);
+ box.appendChild(cancelar);
+ modal.appendChild(box);
+ document.body.appendChild(modal);
+}
+
+
+
+</script>
+
+
+<!-- FIREBASE REALTIME INTEGRATION -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>
+const firebaseConfig={apiKey:"AIzaSyAsrL3eJLWArVegBk4NqrL8m5DsdoA6f1Q",authDomain:"estoque-daniel-san.firebaseapp.com",projectId:"estoque-daniel-san"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+function keySafe(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'_').toLowerCase();}
+
+// listen any element with id starting stock_
+document.querySelectorAll('[id^="stock_"]').forEach(el=>{
+  const id=keySafe(el.id.replace('stock_',''));
+  db.collection('estoque').doc(id).onSnapshot(d=>{
+    if(d.exists) el.textContent=d.data().qtd;
+  });
+});
+
+// intercept changes: when user clicks plus/minus update db by reading qty_*
+document.addEventListener('click',async e=>{
+  if(e.target.matches('button')){
+    const parent=e.target.closest('[id*="qtd_"], .item, div');
+    if(!parent) return;
+    document.querySelectorAll('[id^="qtd_"]').forEach(async q=>{
+      const id=keySafe(q.id.replace('qtd_',''));
+      const v=parseInt(q.textContent)||0;
+      await db.collection('estoque').doc(id).set({qtd:v},{merge:true});
+    });
+  }
+});
+</script>
+
+
+<!-- FIREBASE REALTIME LAYER -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>
+const firebaseConfig={
+  apiKey:"AIzaSyAsrL3eJLWArVegBk4NqrL8m5DsdoA6f1Q",
+  authDomain:"estoque-daniel-san.firebaseapp.com",
+  projectId:"estoque-daniel-san"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+
+function norm(k){
+ return k.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'_').toLowerCase();
+}
+
+const originalSet=Storage.prototype.setItem;
+const originalGet=Storage.prototype.getItem;
+
+Storage.prototype.setItem=function(k,v){
+  const nk=norm(k);
+  originalSet.call(this,nk,v);
+  db.collection("estoque").doc(nk).set({value:v});
+}
+
+Storage.prototype.getItem=function(k){
+  const nk=norm(k);
+  return originalGet.call(this,nk);
+}
+
+db.collection("estoque").onSnapshot(snap=>{
+ snap.forEach(doc=>{
+   localStorage.setItem(doc.id,doc.data().value);
+ });
+ window.dispatchEvent(new Event("storage"));
+});
+</script>
+
+</body>
+</html>
