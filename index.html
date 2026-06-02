@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+/>
+
+<title>DANIEL SAN PRIME</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet"
+/>
+
+<link
+rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+:root{
+
+--bg:#0b0b0b;
+--card:#171717;
+--card2:#1f1f1f;
+
+--gold:#D4AF37;
+--gold2:#F5D76E;
+
+--text:#ffffff;
+--muted:#8f8f8f;
+
+--border:#2a2a2a;
+
+--green:#16A34A;
+--red:#DC2626;
+--blue:#2563EB;
+
+}
+
+body{
+
+background:var(--bg);
+
+color:var(--text);
+
+padding-bottom:100px;
+
+overflow-x:hidden;
+
+}
+
+/* HEADER */
+
+.header{
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+padding:20px;
+
+background:#0b0b0bf0;
+
+backdrop-filter:blur(20px);
+
+border-bottom:1px solid var(--border);
+
+}
+
+.logo{
+
+font-size:24px;
+
+font-weight:800;
+
+}
+
+.logo-sub{
+
+font-size:12px;
+
+margin-top:4px;
+
+color:var(--gold);
+
+font-weight:700;
+
+letter-spacing:1px;
+
+}
+
+.search{
+
+margin-top:16px;
+
+height:58px;
+
+background:var(--card);
+
+border-radius:18px;
+
+display:flex;
+
+align-items:center;
+
+padding:0 18px;
+
+gap:10px;
+
+border:1px solid var(--border);
+
+}
+
+.search input{
+
+flex:1;
+
+background:none;
+
+border:none;
+
+outline:none;
+
+color:white;
+
+font-size:15px;
+
+}
+
+/* PÁGINAS */
+
+.page{
+
+display:none;
+
+padding:18px;
+
+}
+
+.page.active{
+
+display:block;
+
+}
+
+/* MENU */
+
+.bottom-nav{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+right:0;
+
+height:85px;
+
+background:#101010;
+
+border-top:1px solid var(--border);
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+z-index:99999;
+
+}
+
+.nav-btn{
+
+background:none;
+
+border:none;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:6px;
+
+font-size:11px;
+
+font-weight:700;
+
+color:#777;
+
+cursor:pointer;
+
+}
+
+.nav-btn.active{
+
+color:var(--gold);
+
+}
+
+.material-symbols-outlined{
+
+font-size:26px;
+
+}
+
+/* CATEGORIAS */
+
+.category{
+
+background:var(--card);
+
+border-radius:20px;
+
+margin-bottom:15px;
+
+overflow:hidden;
+
+border:1px solid var(--border);
+
+}
+
+.category-header{
+
+padding:18px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+cursor:pointer;
+
+}
+
+.category-title{
+
+font-size:15px;
+
+font-weight:800;
+
+}
+
+.category-count{
+
+background:rgba(212,175,55,.15);
+
+color:var(--gold);
+
+padding:6px 12px;
+
+border-radius:12px;
+
+font-size:11px;
+
+font-weight:800;
+
+}
+
+.category-body{
+
+padding:0 15px 15px;
+
+display:block;
+
+}
+
+/* PRODUTOS */
+
+.product{
+
+background:var(--card2);
+
+padding:15px;
+
+border-radius:16px;
+
+margin-top:10px;
+
+}
+
+.product-name{
+
+font-size:14px;
+
+font-weight:800;
+
+}
+
+.product-stock{
+
+margin-top:5px;
+
+font-size:12px;
+
+color:#999;
+
+}
+
+/* BOTÕES */
+
+.btn{
+
+width:100%;
+
+height:56px;
+
+border:none;
+
+border-radius:16px;
+
+font-size:15px;
+
+font-weight:800;
+
+cursor:pointer;
+
+}
+
+.btn-green{
+
+background:var(--green);
+
+color:white;
+
+}
+
+.btn-blue{
+
+background:var(--blue);
+
+color:white;
+
+}
+
+.btn-red{
+
+background:var(--red);
+
+color:white;
+
+}
+
+/* KPI */
+
+.kpis{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:12px;
+
+}
+
+.kpi{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+.kpi-label{
+
+font-size:12px;
+
+color:#999;
+
+}
+
+.kpi-number{
+
+font-size:26px;
+
+font-weight:800;
+
+margin-top:8px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<div class="logo">
+DANIEL SAN PRIME
+</div>
+
+<div class="logo-sub">
+CONTROLE DE ESTOQUE
+</div>
+
+<div class="search">
+
+<span class="material-symbols-outlined">
+search
+</span>
+
+<input
+id="buscar"
+placeholder="BUSCAR PRODUTO..."
+>
+
+</div>
+
+</div>
+
+<!-- PRODUTOS -->
+
+<div
+id="produtosPage"
+class="page active">
+</div>
+
+<!-- ESTOQUE -->
+
+<div
+id="estoquePage"
+class="page">
+</div>
+
+<!-- PEDIDOS -->
+
+<div
+id="pedidosPage"
+class="page">
+</div>
+
+<!-- RELATORIO -->
+
+<div
+id="relatorioPage"
+class="page">
+</div>
+
+<!-- MENU -->
+
+<div class="bottom-nav">
+
+<button
+class="nav-btn active"
+data-page="produtos"
+>
+
+<span class="material-symbols-outlined">
+category
+</span>
+
+<span>
+PRODUTOS
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="estoque"
+>
+
+<span class="material-symbols-outlined">
+inventory_2
+</span>
+
+<span>
+ESTOQUE
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="pedidos"
+>
+
+<span class="material-symbols-outlined">
+shopping_cart
+</span>
+
+<span>
+PEDIDOS
+</span>
+
+</button>
+
+<button
+class="nav-btn"
+data-page="relatorio"
+>
+
+<span class="material-symbols-outlined">
+assessment
+</span>
+
+<span>
+RELATÓRIO
+</span>
+
+</button>
+
+</div>
+
+<script type="module">
+
+    import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue,
+push,
+set,
+update
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+/* =====================================
+FIREBASE
+===================================== */
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyAsrL3eJLWArVegBk4NqrL8m5DsdoA6f1Q",
+
+authDomain:"estoque-daniel-san.firebaseapp.com",
+
+databaseURL:"https://estoque-daniel-san-default-rtdb.firebaseio.com",
+
+projectId:"estoque-daniel-san",
+
+storageBucket:"estoque-daniel-san.firebasestorage.app",
+
+messagingSenderId:"355146085358",
+
+appId:"1:355146085358:web:d20d238a253df446aa14ff"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+/* =====================================
+GLOBAL
+===================================== */
+
+window.db = db;
+
+window.produtos = [];
+
+window.pedidoAtual = {};
+
+window.movimentacoesPendentes = {};
+
+window.tipoMovimentacao = {};
+
+window.UNIDADES = [
+
+'KG',
+'LITRO',
+'CAIXA',
+'PCT',
+'GARRAFA',
+'LATA',
+'UN'
+
+];
+
+/* =====================================
+TELAS
+===================================== */
+
+const produtosPage =
+document.getElementById(
+'produtosPage'
+);
+
+const estoquePage =
+document.getElementById(
+'estoquePage'
+);
+
+const pedidosPage =
+document.getElementById(
+'pedidosPage'
+);
+
+const relatorioPage =
+document.getElementById(
+'relatorioPage'
+);
+
+const buscar =
+document.getElementById(
+'buscar'
+);
+
+/* =====================================
+MENU
+===================================== */
+
+document
+.querySelectorAll('.nav-btn')
+.forEach(btn=>{
+
+btn.addEventListener(
+'click',
+()=>{
+
+document
+.querySelectorAll('.nav-btn')
+.forEach(x=>{
+
+x.classList.remove(
+'active'
+);
+
+});
+
+btn.classList.add(
+'active'
+);
+
+document
+.querySelectorAll('.page')
+.forEach(x=>{
+
+x.classList.remove(
+'active'
+);
+
+});
+
+document
+.getElementById(
+btn.dataset.page + 'Page'
+)
+.classList.add(
+'active'
+);
+
+}
+);
+
+});
+
+/* =====================================
+CATEGORIAS
+===================================== */
+
+const CATEGORIAS = [
+
+'JAPONÊS',
+
+'JAPONÊS GELADEIRA',
+
+'PEIXES',
+
+'GELADOS / CONGELADOS',
+
+'MERCADO',
+
+'MERCADO LIMPEZA',
+
+'LIMPEZA / DESCARTÁVEIS',
+
+'ACESSÓRIOS / UTENSÍLIOS',
+
+'BEBIDAS / REFRIGERANTES / CERVEJAS',
+
+'DESTILADOS / BAR / DRINKS'
+
+];
+
+/* =====================================
+ABRIR / FECHAR
+===================================== */
+
+window.toggleCategoria =
+function(el){
+
+const body =
+el.nextElementSibling;
+
+body.style.display =
+
+body.style.display ===
+'none'
+
+?
+
+'block'
+
+:
+
+'none';
+
+};
+
+/* =====================================
+BUSCA
+===================================== */
+console.log(
+'RENDER',
+window.produtos.length
+);
+
+buscar.addEventListener(
+'input',
+()=>{
+renderProdutos();
+}
+);
+
+/* =====================================
+PRODUTOS
+===================================== */
+
+function renderProdutos(){
+
+const termo =
+
+buscar.value
+.toLowerCase()
+.trim();
+
+produtosPage.innerHTML =
+'';
+
+const agrupado = {};
+
+CATEGORIAS.forEach(cat=>{
+
+agrupado[cat] = [];
+
+});
+
+window.produtos.forEach(produto=>{
+
+const nome =
+
+String(
+produto.nome || ''
+)
+.toLowerCase();
+
+if(
+termo
+&&
+!nome.includes(
+termo
+)
+){
+return;
+}
+
+const categoria =
+
+produto.categoria
+||
+'OUTROS';
+
+if(
+!agrupado[categoria]
+){
+
+agrupado[categoria] = [];
+
+}
+
+agrupado[categoria]
+.push(produto);
+
+});
+
+CATEGORIAS.forEach(categoria=>{
+
+const lista =
+
+agrupado[categoria]
+||
+[];
+
+if(
+lista.length === 0
+){
+return;
+}
+
+const div =
+document.createElement(
+'div'
+);
+
+div.className =
+'category';
+
+div.innerHTML =
+
+`
+<div
+class="category-header"
+onclick="toggleCategoria(this)"
+>
+
+<div class="category-title">
+${categoria}
+</div>
+
+<div class="category-count">
+${lista.length}
+</div>
+
+</div>
+
+<div class="category-body">
+
+${lista.map(produto=>`
+
+<div class="product">
+
+<div class="product-name">
+
+${String(
+produto.nome
+).toUpperCase()}
+
+</div>
+
+<div class="product-stock">
+
+ESTOQUE:
+${produto.estoque || 0}
+
+${produto.unidade || ''}
+
+</div>
+
+</div>
+
+`).join('')}
+
+</div>
+`;
+
+produtosPage.appendChild(
+div
+);
+
+});
+
+}
+
+/* =====================================
+CARREGAR FIREBASE
+===================================== */
+
+/* =====================================
+ESTOQUE
+===================================== */
+
+function renderEstoque(){
+
+estoquePage.innerHTML = '';
+
+const titulo =
+document.createElement('h2');
+
+titulo.innerText =
+'CONTROLE DE ESTOQUE';
+
+titulo.style.marginBottom =
+'15px';
+
+estoquePage.appendChild(
+titulo
+);
+
+window.produtos.forEach(produto=>{
+
+const qtd =
+
+window.movimentacoesPendentes[
+produto.id
+]
+||
+0;
+
+const tipo =
+
+window.tipoMovimentacao[
+produto.id
+]
+||
+'ENTRADA';
+
+const card =
+document.createElement(
+'div'
+);
+
+card.className =
+'product';
+
+card.innerHTML =
+
+`
+<div class="product-name">
+${produto.nome.toUpperCase()}
+</div>
+
+<div class="product-stock">
+
+ATUAL:
+
+${produto.estoque || 0}
+
+${produto.unidade || ''}
+
+</div>
+
+<div
+style="
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:12px;
+"
+>
+
+<button
+onclick="menosEstoque('${produto.id}')"
+style="
+width:50px;
+height:50px;
+border:none;
+border-radius:14px;
+background:#333;
+color:white;
+font-size:24px;
+"
+>
+-
+</button>
+
+<div
+style="
+flex:1;
+text-align:center;
+font-size:22px;
+font-weight:800;
+"
+>
+${qtd}
+</div>
+
+<button
+onclick="maisEstoque('${produto.id}')"
+style="
+width:50px;
+height:50px;
+border:none;
+border-radius:14px;
+background:#16A34A;
+color:white;
+font-size:24px;
+"
+>
++
+</button>
+
+</div>
+
+<div
+style="
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:12px;
+"
+>
+
+<button
+onclick="selecionarTipo('${produto.id}','ENTRADA')"
+style="
+height:42px;
+border:none;
+border-radius:12px;
+background:${tipo==='ENTRADA' ? '#16A34A' : '#2a2a2a'};
+color:white;
+font-weight:700;
+"
+>
+ENTRADA
+</button>
+
+<button
+onclick="selecionarTipo('${produto.id}','SAIDA')"
+style="
+height:42px;
+border:none;
+border-radius:12px;
+background:${tipo==='SAIDA' ? '#DC2626' : '#2a2a2a'};
+color:white;
+font-weight:700;
+"
+>
+SAÍDA
+</button>
+
+<button
+onclick="selecionarTipo('${produto.id}','AJUSTE')"
+style="
+height:42px;
+border:none;
+border-radius:12px;
+background:${tipo==='AJUSTE' ? '#2563EB' : '#2a2a2a'};
+color:white;
+font-weight:700;
+"
+>
+AJUSTE
+</button>
+
+</div>
+`;
+
+estoquePage.appendChild(
+card
+);
+
+});
+
+const salvar =
+document.createElement(
+'button'
+);
+
+salvar.className =
+'btn btn-green';
+
+salvar.style.marginTop =
+'20px';
+
+salvar.innerText =
+'SALVAR MOVIMENTAÇÕES';
+
+salvar.onclick =
+salvarMovimentacoes;
+
+estoquePage.appendChild(
+salvar
+);
+
+}
+
+/* =====================================
++
+===================================== */
+
+window.maisEstoque =
+function(id){
+
+if(
+!window.movimentacoesPendentes[id]
+){
+
+window.movimentacoesPendentes[id] = 0;
+
+}
+
+window.movimentacoesPendentes[id]++;
+
+renderEstoque();
+
+};
+
+/* =====================================
+-
+===================================== */
+
+window.menosEstoque =
+function(id){
+
+if(
+!window.movimentacoesPendentes[id]
+){
+return;
+}
+
+window.movimentacoesPendentes[id]--;
+
+if(
+window.movimentacoesPendentes[id] <= 0
+){
+
+delete
+window.movimentacoesPendentes[id];
+
+}
+
+renderEstoque();
+
+};
+
+/* =====================================
+TIPO
+===================================== */
+
+window.selecionarTipo =
+function(
+id,
+tipo
+){
+
+window.tipoMovimentacao[id] =
+tipo;
+
+renderEstoque();
+
+};
+
+/* =====================================
+SALVAR
+===================================== */
+
+window.salvarMovimentacoes =
+async function(){
+
+const itens =
+
+Object.keys(
+window.movimentacoesPendentes
+);
+
+if(
+itens.length === 0
+){
+
+alert(
+'Nenhuma movimentação.'
+);
+
+return;
+
+}
+
+try{
+
+for(
+const id
+of itens
+){
+
+const produto =
+
+window.produtos.find(
+p=>p.id===id
+);
+
+if(
+!produto
+){
+continue;
+}
+
+const qtd =
+
+Number(
+window.movimentacoesPendentes[id]
+);
+
+const tipo =
+
+window.tipoMovimentacao[id]
+||
+'ENTRADA';
+
+let estoqueAtual =
+
+Number(
+produto.estoque
+||
+0
+);
+
+if(
+tipo === 'ENTRADA'
+){
+
+estoqueAtual += qtd;
+
+}
+
+if(
+tipo === 'SAIDA'
+){
+
+estoqueAtual -= qtd;
+
+}
+
+if(
+tipo === 'AJUSTE'
+){
+
+estoqueAtual = qtd;
+
+}
+
+if(
+estoqueAtual < 0
+){
+
+estoqueAtual = 0;
+
+}
+
+await update(
+
+ref(
+db,
+'produtos/' + id
+),
+
+{
+
+estoque:
+estoqueAtual
+
+}
+
+);
+
+await push(
+
+ref(
+db,
+'movimentacoes'
+),
+
+{
+
+produto:
+produto.nome,
+
+tipo,
+
+quantidade:
+qtd,
+
+estoqueFinal:
+estoqueAtual,
+
+data:
+new Date()
+.toISOString()
+
+}
+
+);
+
+}
+
+window.movimentacoesPendentes =
+{};
+
+window.tipoMovimentacao =
+{};
+
+alert(
+'MOVIMENTAÇÃO SALVA'
+);
+
+}catch(e){
+
+console.error(e);
+
+alert(
+'Erro ao salvar.'
+);
+
+}
+
+};
+
+/* =====================================
+ATUALIZA ESTOQUE
+===================================== */
+
+const originalRenderProdutos =
+renderProdutos;
+
+renderProdutos =
+function(){
+
+originalRenderProdutos();
+
+renderEstoque();
+
+};
+
+/* =====================================
+PEDIDOS DA SEMANA
+===================================== */
+
+function renderPedidos(){
+
+pedidosPage.innerHTML = '';
+
+const titulo =
+document.createElement('h2');
+
+titulo.innerText =
+'PEDIDOS DA SEMANA';
+
+titulo.style.marginBottom =
+'15px';
+
+pedidosPage.appendChild(
+titulo
+);
+
+window.produtos.forEach(produto=>{
+
+const item =
+
+window.pedidoAtual[
+produto.id
+]
+||
+{
+quantidade:0,
+unidade:
+produto.unidade || 'UN'
+};
+
+const card =
+document.createElement(
+'div'
+);
+
+card.className =
+'product';
+
+card.innerHTML =
+
+`
+<div class="product-name">
+${produto.nome.toUpperCase()}
+</div>
+
+<div class="product-stock">
+ESTOQUE:
+${produto.estoque || 0}
+${produto.unidade || ''}
+</div>
+
+<div
+style="
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:12px;
+"
+>
+
+<button
+onclick="menosPedido('${produto.id}')"
+style="
+width:50px;
+height:50px;
+border:none;
+border-radius:14px;
+background:#333;
+color:white;
+font-size:24px;
+"
+>
+-
+</button>
+
+<div
+style="
+flex:1;
+text-align:center;
+font-size:22px;
+font-weight:800;
+"
+>
+${item.quantidade}
+</div>
+
+<button
+onclick="maisPedido('${produto.id}')"
+style="
+width:50px;
+height:50px;
+border:none;
+border-radius:14px;
+background:#16A34A;
+color:white;
+font-size:24px;
+"
+>
++
+</button>
+
+</div>
+
+<select
+onchange="
+alterarUnidadePedido(
+'${produto.id}',
+this.value
+)
+"
+style="
+width:100%;
+height:50px;
+margin-top:12px;
+background:#202020;
+color:white;
+border:1px solid #333;
+border-radius:14px;
+padding:0 12px;
+font-weight:700;
+"
+>
+
+${window.UNIDADES.map(
+
+u=>`
+
+<option
+
+value="${u}"
+
+${item.unidade===u?'selected':''}
+
+>
+
+${u}
+
+</option>
+
+`
+
+).join('')}
+
+</select>
+`;
+
+pedidosPage.appendChild(
+card
+);
+
+});
+
+/* BOTÕES */
+
+const limpar =
+document.createElement(
+'button'
+);
+
+limpar.className =
+'btn btn-red';
+
+limpar.style.marginTop =
+'20px';
+
+limpar.innerText =
+'LIMPAR PEDIDO';
+
+limpar.onclick =
+limparPedido;
+
+pedidosPage.appendChild(
+limpar
+);
+
+const salvar =
+document.createElement(
+'button'
+);
+
+salvar.className =
+'btn btn-blue';
+
+salvar.style.marginTop =
+'12px';
+
+salvar.innerText =
+'SALVAR PEDIDO';
+
+salvar.onclick =
+salvarPedido;
+
+pedidosPage.appendChild(
+salvar
+);
+
+}
+
+/* =====================================
++
+===================================== */
+
+window.maisPedido =
+function(id){
+
+const produto =
+
+window.produtos.find(
+p=>p.id===id
+);
+
+if(
+!window.pedidoAtual[id]
+){
+
+window.pedidoAtual[id] = {
+
+produto:
+produto.nome,
+
+quantidade:0,
+
+unidade:
+produto.unidade || 'UN'
+
+};
+
+}
+
+window.pedidoAtual[id]
+.quantidade++;
+
+renderPedidos();
+
+};
+
+/* =====================================
+-
+===================================== */
+
+window.menosPedido =
+function(id){
+
+if(
+!window.pedidoAtual[id]
+){
+return;
+}
+
+window.pedidoAtual[id]
+.quantidade--;
+
+if(
+window.pedidoAtual[id]
+.quantidade <= 0
+){
+
+delete
+window.pedidoAtual[id];
+
+}
+
+renderPedidos();
+
+};
+
+/* =====================================
+UNIDADE
+===================================== */
+
+window.alterarUnidadePedido =
+function(
+id,
+unidade
+){
+
+if(
+!window.pedidoAtual[id]
+){
+
+window.pedidoAtual[id] = {
+
+produto:'',
+quantidade:0,
+unidade
+
+};
+
+}
+
+window.pedidoAtual[id]
+.unidade =
+unidade;
+
+};
+
+/* =====================================
+LIMPAR
+===================================== */
+
+window.limparPedido =
+function(){
+
+if(
+!confirm(
+'Limpar pedido?'
+)
+){
+return;
+}
+
+window.pedidoAtual =
+{};
+
+renderPedidos();
+
+};
+
+/* =====================================
+SALVAR PEDIDO
+===================================== */
+
+window.salvarPedido =
+async function(){
+
+const itens =
+
+Object.values(
+window.pedidoAtual
+);
+
+if(
+itens.length === 0
+){
+
+alert(
+'Nenhum item selecionado.'
+);
+
+return;
+
+}
+
+let totalItens = 0;
+
+itens.forEach(i=>{
+
+totalItens +=
+Number(
+i.quantidade
+);
+
+});
+
+const pedido = {
+
+data:
+new Date()
+.toISOString(),
+
+status:
+'PENDENTE',
+
+totalItens,
+
+itens
+
+};
+
+try{
+
+const novoPedido =
+push(
+ref(
+db,
+'pedidosSemana'
+)
+);
+
+await set(
+novoPedido,
+pedido
+);
+
+gerarWhatsApp(
+itens,
+totalItens
+);
+
+window.pedidoAtual =
+{};
+
+renderPedidos();
+
+alert(
+'PEDIDO SALVO'
+);
+
+}catch(e){
+
+console.error(e);
+
+alert(
+'Erro ao salvar.'
+);
+
+}
+
+};
+
+/* =====================================
+WHATSAPP
+===================================== */
+
+function gerarWhatsApp(
+itens,
+totalItens
+){
+
+let texto =
+
+'PEDIDO SEMANAL - DANIEL SAN PRIME\n\n';
+
+itens.forEach(item=>{
+
+texto +=
+
+item.produto
+.toUpperCase()
+
++
+
+' - '
+
++
+
+item.quantidade
+
++
+
+' '
+
++
+
+item.unidade
+
++
+
+'\n';
+
+});
+
+texto +=
+
+'\nTOTAL DE ITENS: '
+
++
+
+totalItens;
+
+window.open(
+
+'https://wa.me/?text='
+
++
+
+encodeURIComponent(
+texto
+),
+
+'_blank'
+
+);
+
+}
+
+/* =====================================
+ATUALIZA PEDIDOS
+===================================== */
+
+const originalRenderEstoque =
+renderEstoque;
+
+renderEstoque =
+function(){
+
+originalRenderEstoque();
+
+renderPedidos();
+
+};
+
+/* =====================================
+RELATÓRIO
+===================================== */
+
+function renderRelatorio(){
+
+const totalProdutos =
+window.produtos.length;
+
+const semEstoque =
+window.produtos.filter(
+
+p=>
+
+Number(
+p.estoque || 0
+)
+
+<= 0
+
+).length;
+
+const estoqueBaixo =
+window.produtos.filter(
+
+p=>
+
+Number(
+p.estoque || 0
+)
+
+> 0
+
+&&
+
+Number(
+p.estoque || 0
+)
+
+<= 5
+
+).length;
+
+const categorias =
+new Set(
+
+window.produtos.map(
+p=>p.categoria
+)
+
+).size;
+
+const totalPedidos =
+
+Object.keys(
+window.pedidoAtual
+).length;
+
+relatorioPage.innerHTML =
+
+`
+<div class="kpis">
+
+<div class="kpi">
+
+<div class="kpi-label">
+PRODUTOS
+</div>
+
+<div class="kpi-number">
+${totalProdutos}
+</div>
+
+</div>
+
+<div class="kpi">
+
+<div class="kpi-label">
+SEM ESTOQUE
+</div>
+
+<div class="kpi-number">
+${semEstoque}
+</div>
+
+</div>
+
+<div class="kpi">
+
+<div class="kpi-label">
+ESTOQUE BAIXO
+</div>
+
+<div class="kpi-number">
+${estoqueBaixo}
+</div>
+
+</div>
+
+<div class="kpi">
+
+<div class="kpi-label">
+CATEGORIAS
+</div>
+
+<div class="kpi-number">
+${categorias}
+</div>
+
+</div>
+
+</div>
+
+<div
+style="
+margin-top:15px;
+"
+>
+
+<div class="product">
+
+<div class="product-name">
+
+RESUMO DO SISTEMA
+
+</div>
+
+<div
+style="
+margin-top:10px;
+line-height:28px;
+font-size:14px;
+"
+>
+
+TOTAL PRODUTOS:
+<b>${totalProdutos}</b>
+
+<br>
+
+SEM ESTOQUE:
+<b>${semEstoque}</b>
+
+<br>
+
+ESTOQUE BAIXO:
+<b>${estoqueBaixo}</b>
+
+<br>
+
+CATEGORIAS:
+<b>${categorias}</b>
+
+<br>
+
+ITENS NO PEDIDO:
+<b>${totalPedidos}</b>
+
+</div>
+
+</div>
+
+</div>
+`;
+
+}
+
+/* =====================================
+ATUALIZA TODAS AS TELAS
+===================================== */
+
+function atualizarSistema(){
+
+renderProdutos();
+
+renderEstoque();
+
+renderPedidos();
+
+renderRelatorio();
+
+}
+
+/* =====================================
+REALTIME UPDATE
+===================================== */
+
+onValue(
+
+ref(
+db,
+'produtos'
+),
+
+(snapshot)=>{
+
+const dados =
+snapshot.val()
+||
+{};
+
+window.produtos =
+
+Object.entries(
+dados
+).map(
+([
+id,
+produto
+])=>({
+
+id,
+
+...produto
+
+})
+);
+
+
+
+atualizarSistema();
+
+console.log(window.produtos);
+alert(
+'Produtos carregados: ' +
+window.produtos.length
+);
+
+}
+
+);
+
+/* =====================================
+INICIALIZAÇÃO
+===================================== */
+
+setTimeout(()=>{
+
+atualizarSistema();
+
+},500);
+
+console.log(
+'SISTEMA DANIEL SAN PRIME ONLINE'
+);
+
+</script>
+</body>
+</html>
